@@ -26,7 +26,7 @@ x11docker --pw pkexec --no-entrypoint \
   --share $HOME/Documents ${DEVICES} \
   --clipboard --hostdisplay \
   -- \
-  --volume ./shares:/home/yourusername/shares \
+  --volume $PWD/shares:/home/yourusername/shares \
   -- \
   yourusername/docker-ffcp:20.04-2.3.0a1-20201018a \
   /usr/bin/codium-wait
@@ -38,7 +38,7 @@ x11docker --interactive --sudouser --pw pkexec --no-entrypoint \
   --share $HOME/Documents ${DEVICES} \
   --clipboard --hostdisplay \
   -- \
-  --volume ./shares:/home/yourusername/shares \
+  --volume $PWD/shares:/home/yourusername/shares \
   -- \
   yourusername/docker-ffcp:20.04-2.3.0a1-20201018a \
   /usr/bin/bash
