@@ -16,3 +16,7 @@ You will likely want to backup your EEPROM from the FFCP menu first as you are g
 
 If you install the deb files on your host computer you will find the files are installed to /usr/local/bin. This differs from the default install path of /usr/bin for gpx and prusa-slicer, you may need to update scripts accordingly.
 
+In the "tests" folder "M126_with_speeds.gcode" contains a script that tests fan speeds of 10%,20%,30%,40%,....,100% for 6 seconds each with a 1 second pause in between. You can test building this "gpx" to confirm that the output matches "M126_with_speeds.x3g".
+You can then run "M126_with_speeds.x3g" on your FFCP to confirm that the variable fan speeds are indeed working.
+
+Pre-built deb files are included, PrusaSlicer 2.3.0-alpha1 was used for this build. You can build with PrusaSlicer 2.2.0 if you want by updating the Dockerbuild script accordingly.
