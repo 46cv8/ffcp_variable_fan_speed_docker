@@ -128,10 +128,33 @@ RUN cd /build \
  && checkinstall -D --install=yes --fstrans=no --pkgname=gpx --provides=gpx --pkgversion=2.5.2-20201018a --nodoc -y \
  && cp /build/GPX/build/gpx_2.5.2-20201018a-1_amd64.deb /built/gpx_2.5.2-20201018a-1_amd64.deb
 
-FROM build_gpx as install_replicatorg
+FROM build_gpx as build_gpx_ui
+RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y \
+      qttools5-dev-tools \
+      qtbase5-dev \
+ && cd /build \
+ && git clone https://github.com/46cv8/GpxUi \
+ && cd /build/GpxUi \
+ && git remote add upstream https://github.com/markwal/GpxUi.git \
+ && git checkout variable_fan_speed \
+ && git submodule update --init --recursive \
+ && cd /build/GpxUi/GPX \
+ && git checkout variable_fan_speed \
+ && ./configure \
+ && cd /build/GpxUi \
+ && make release \
+# checkinstall can't build qmake modules to debian so I can't make a package and just to make install (see: https://askubuntu.com/questions/1014619/a-working-version-of-checkinstall)
+# && checkinstall -D --install=yes --fstrans=no --pkgname=gpx-ui --provides=gpx-ui --pkgversion=2.5.2-20201018a --nodoc -y \
+# && cp /build/GpxUi/gpx-ui_2.5.2-20201018a-1_amd64.deb /built/gpx-ui_2.5.2-20201018a-1_amd64.deb
+ && make install
+
+
+FROM build_gpx_ui as install_replicatorg
 RUN cd /opt \
  && wget --no-verbose https://storage.googleapis.com/google-code-archive-downloads/v2/code.google.com/replicatorg/replicatorg-0040-linux.tgz \
  && tar --extract --ungzip --file replicatorg-0040-linux.tgz \
  && chmod 777 /opt/replicatorg-0040
+ 
 
-# sudo docker build -t yourusername/docker-ffcp:20.04-2.3.0a1-20201018a .
+
+# sudo docker build -t peter/docker-ffcp:20.04-2.3.0a1-20201018a .
