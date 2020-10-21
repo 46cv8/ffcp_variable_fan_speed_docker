@@ -1,7 +1,11 @@
 # FlashForge Creator Pro Variable Fan Speed for Part Cooling Fan Docker Build Scripts
 
+Please read this README completely before attempting to use these custom builds.
+
 Dockerbuild and x11docker launch script for building PrusaSlicer, Sailfish-MightyBoardFirmware and GPX with variable fan speed support via enhanced M126 commands.
 The docker image is based of Ubuntu 20.04.
+
+before building the Dockerbuild or running launcher.sh be sure to update "yourusername" to your user name in both scripts.
 
 Once the build is completed the directory "/built" in the image will contain the files below.
  - /built/ff_creatorx-2560_v7.8.0.en.hex: A firmware for the ffcp that supports custom fanspeed via gcode for the part cooling fan. (https://github.com/jetty840/Sailfish-MightyBoardFirmware/compare/master...46cv8:variable_fan_speed) 
@@ -20,3 +24,5 @@ In the "tests" folder "M126_with_speeds.gcode" contains a script that tests fan 
 You can then run "M126_with_speeds.x3g" on your FFCP to confirm that the variable fan speeds are indeed working.
 
 Pre-built deb files are included, PrusaSlicer 2.3.0-alpha1 was used for this build. You can build with PrusaSlicer 2.2.0 if you want by updating the Dockerbuild script accordingly.
+
+WARNING: After updating your firmware any x3g scripts you have will need to be rebuilt if you want to make use of the cooling fan in any meaningful way. Otherwise the 1 value signifying use the cooling fan, will simply be interpreted as 1% which will not start the fan at all. (If there is demand for a version that interprets 1% as full speed still, I can add that addition to Sailfish to full backwards and forwards compatability, it will just mean that 1% fan speed will be mapped to 100%)
