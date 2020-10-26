@@ -17,10 +17,10 @@ DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y \
  && git clone https://github.com/46cv8/OctoPrint-GPX.git \
  && cd /build/OctoPrint-GPX \
  && git remote add upstream https://github.com/markwal/OctoPrint-GPX.git \
- && git checkout variable_fan_speed \
+ && git checkout variable_fan_speed_and_fast_alt_serial \
  && git submodule update --init --recursive \
  && cd /build/OctoPrint-GPX/GPX \
- && git checkout variable_fan_speed \
+ && git checkout variable_fan_speed_and_fast_alt_serial \
  && ./configure \
  && cd /build/OctoPrint-GPX \
  && python setup.py bdist_wheel
@@ -29,3 +29,8 @@ DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y \
  # then commit the .tar.gz to github.
  # then from octoprint you can just reference that .tar.gz with the submodule already included. 
  # eg) https://github.com/46cv8/OctoPrint-GPX/blob/variable_fan_speed/OctoPrint-GPX-variable_fan_speed-2.6.6.tar.gz
+
+ # then build a .tar.gz "cd ../ && cp -r OctoPrint-GPX OctoPrint-GPX-variable_fan_speed_and_fast_alt_serial-2.6.6 && rm -rf OctoPrint-GPX-variable_fan_speed_and_fast_alt_serial-2.6.6/.git && tar -czvf OctoPrint-GPX-variable_fan_speed_and_fast_alt_serial-2.6.6.tar.gz OctoPrint-GPX-variable_fan_speed_and_fast_alt_serial-2.6.6 && cp OctoPrint-GPX-variable_fan_speed_and_fast_alt_serial-2.6.6.tar.gz OctoPrint-GPX/OctoPrint-GPX-variable_fan_speed_and_fast_alt_serial-2.6.6.tar.gz"
+ # then commit the .tar.gz to github.
+ # then from octoprint you can just reference that .tar.gz with the submodule already included.
+ # eg) https://github.com/46cv8/OctoPrint-GPX/blob/variable_fan_speed_and_fast_alt_serial/OctoPrint-GPX-variable_fan_speed-2.6.6.tar.gz

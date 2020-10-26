@@ -111,7 +111,7 @@ RUN cd /build \
  && git clone https://github.com/46cv8/Sailfish-MightyBoardFirmware.git \
  && cd /build/Sailfish-MightyBoardFirmware/firmware \
  && git remote add upstream https://github.com/jetty840/Sailfish-MightyBoardFirmware.git \
- && git checkout variable_fan_speed \
+ && git checkout variable_fan_speed_and_fast_alt_serial \
  && scons platform=ff_creatorx-2560 \
  && cp /build/Sailfish-MightyBoardFirmware/firmware/build/ff_creatorx-2560/ff_creatorx-2560_v7.8.0.en.hex /built/ff_creatorx-2560_v7.8.0.en.hex
  
@@ -120,7 +120,7 @@ RUN cd /build \
  && git clone https://github.com/46cv8/GPX.git \
  && cd /build/GPX \
  && git remote add upstream https://github.com/markwal/GPX.git \
- && git checkout variable_fan_speed \
+ && git checkout variable_fan_speed_and_fast_alt_serial \
  && mkdir build \
  && cd /build/GPX/build \
  && ../configure \
@@ -136,10 +136,10 @@ RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y \
  && git clone https://github.com/46cv8/GpxUi \
  && cd /build/GpxUi \
  && git remote add upstream https://github.com/markwal/GpxUi.git \
- && git checkout variable_fan_speed \
+ && git checkout variable_fan_speed_and_fast_alt_serial \
  && git submodule update --init --recursive \
  && cd /build/GpxUi/GPX \
- && git checkout variable_fan_speed \
+ && git checkout variable_fan_speed_and_fast_alt_serial \
  && cd /build/GpxUi \
  && make release \
 # checkinstall can't build qmake modules to debian so I can't make a package and just do make install (see: https://askubuntu.com/questions/1014619/a-working-version-of-checkinstall)
