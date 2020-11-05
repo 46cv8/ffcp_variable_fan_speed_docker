@@ -28,4 +28,4 @@ DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y \
  # then build a .tar.gz "cd ../ && cp -r OctoPrint-GPX OctoPrint-GPX-variable_fan_speed-2.6.6 && rm -rf OctoPrint-GPX-variable_fan_speed-2.6.6/.git && tar -czvf OctoPrint-GPX-variable_fan_speed-2.6.6.tar.gz OctoPrint-GPX-variable_fan_speed-2.6.6 && cp OctoPrint-GPX-variable_fan_speed-2.6.6.tar.gz OctoPrint-GPX/OctoPrint-GPX-variable_fan_speed-2.6.6.tar.gz"
  # then commit the .tar.gz to github.
  # then from octoprint you can just reference that .tar.gz with the submodule already included. 
- # eg) https://github.com/46cv8/OctoPrint-GPX/blob/variable_fan_speed/OctoPrint-GPX-variable_fan_speed-2.6.6.tar.gz
+ # eg) https://github.com/46cv8/OctoPrint-GPX/raw/variable_fan_speed/OctoPrint-GPX-variable_fan_speed-2.6.6.tgz
