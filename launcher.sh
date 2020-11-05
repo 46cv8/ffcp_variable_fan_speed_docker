@@ -55,6 +55,8 @@ exit
 # To program modified sailfish (from https://github.com/DrLex0/Sailfish-MightyBoardFirmware/releases)
 # cd /build/Sailfish-MightyBoardFirmware/firmware/build/ff_creatorx-2560/
 # avrdude -D -p m2560 -P /dev/ttyACM0 -c stk500v2 -b 57600 -U flash:w:ff_creatorx-2560_v7.8.0.en.hex:i
+# cd ~/shares/built/variable_fan_speed/variable_fan_speed_and_fast_alt_serial
+# avrdude -D -p m2560 -P /dev/ttyACM0 -c stk500v2 -b 57600 -U flash:w:ff_creatorx-2560_v7.8.0.en.hex:i
 
 # To rebuild the modified gpx
 # cd /build/GPX/build
@@ -75,6 +77,7 @@ exit
 # gpx -m fcp -s M126.gcode /dev/ttyACM0
 # gpx -m fcp M126_with_speeds.gcode
 # gpx -m fcp -s M126_with_speeds.gcode /dev/ttyACM0
+# gpx -m fcp -s -b 115200 M126_with_speeds.gcode /dev/ttyUSB0
 # python3
 # import binascii
 # with open('M126_with_speeds.x3g', 'rb') as f:
