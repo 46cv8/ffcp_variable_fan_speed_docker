@@ -46,6 +46,10 @@ x11docker --interactive --sudouser --pw pkexec --no-entrypoint \
 
 exit
 
+# sudo cp /build/PrusaSlicer/build/prusa-slicer_2.3.0-alpha3-20201116a-1_amd64.deb ~/shares/built/variable_fan_speed/
+# mkdir -p ~/shares/built/variable_fan_speed/variable_fan_speed_and_fast_alt_serial/20201116a/
+# sudo cp /build/Sailfish-MightyBoardFirmware/firmware/build/ff_creatorx-2560/ff_creatorx-2560_v7.8.0.en.* ~/shares/built/variable_fan_speed/variable_fan_speed_and_fast_alt_serial/20201116a/
+# sudo cp /build/GPX/build/gpx_2.5.2-20201116a-1_amd64.deb ~/shares/built/variable_fan_speed/variable_fan_speed_and_fast_alt_serial/
 
 # To rebuild the modified sailfish
 # sudo -i
