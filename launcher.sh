@@ -28,7 +28,7 @@ x11docker --pw pkexec --no-entrypoint \
   -- \
   --volume $PWD/shares:/home/yourusername/shares \
   -- \
-  yourusername/docker-ffcp:20.04-2.3.0a1-20201018a \
+  yourusername/docker-ffcp:20.04-2.3.0a3-20201116a \
   /usr/bin/codium-wait
 ###BLOCK-COMMENT
 
@@ -40,7 +40,7 @@ x11docker --interactive --sudouser --pw pkexec --no-entrypoint \
   -- \
   --volume $PWD/shares:/home/yourusername/shares \
   -- \
-  yourusername/docker-ffcp:20.04-2.3.0a1-20201018a \
+  yourusername/docker-ffcp:20.04-2.3.0a3-20201116a \
   /usr/bin/bash
 ###BLOCK-COMMENT
 
