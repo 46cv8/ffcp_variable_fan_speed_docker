@@ -17,10 +17,12 @@ DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y \
  && git clone https://github.com/46cv8/OctoPrint-GPX.git \
  && cd /build/OctoPrint-GPX \
  && git remote add upstream https://github.com/markwal/OctoPrint-GPX.git \
- && git checkout variable_fan_speed_and_fast_alt_serial \
+# && git checkout variable_fan_speed_and_fast_alt_serial_2_5_2 \
+ && git checkout variable_fan_speed_and_fast_alt_serial_2_6_8 \
  && git submodule update --init --recursive \
  && cd /build/OctoPrint-GPX/GPX \
- && git checkout variable_fan_speed_and_fast_alt_serial \
+# && git checkout variable_fan_speed_and_fast_alt_serial_2_5_2 \
+ && git checkout variable_fan_speed_and_fast_alt_serial_2_6_8 \
  && ./configure \
  && cd /build/OctoPrint-GPX \
  && python setup.py bdist_wheel

@@ -84,7 +84,8 @@ RUN cd /build \
  && git remote add upstream https://github.com/prusa3d/PrusaSlicer.git \
 # && git checkout variable_fan_speed_2_2_0 \
 # && git checkout variable_fan_speed_2_3_0_alpha1 \
- && git checkout variable_fan_speed_2_3_0_alpha3 \
+# && git checkout variable_fan_speed_2_3_0_alpha3 \
+ && git checkout variable_fan_speed_2_4_2 \
  && mkdir build \
  && cd /build/PrusaSlicer/deps/build \
  && cmake .. -DCMAKE_BUILD_TYPE=Release -DSLIC3R_BUILD_TESTS=OFF \
@@ -97,8 +98,10 @@ RUN cd /build/PrusaSlicer \
  && make -j8
 RUN cd /build/PrusaSlicer/build \
 # asan fails to build install via checkinstall so we need the following environment variable set https://github.com/google/sanitizers/issues/796
- && ASAN_OPTIONS=verify_asan_link_order=0 checkinstall -D --install=yes --fstrans=no --pkgname=prusa-slicer --provides=prusa-slicer --pkgversion=2.3.0-alpha3-20201116a --nodoc -y \
- && cp /build/PrusaSlicer/build/prusa-slicer_2.3.0-alpha3-20201116a-1_amd64.deb /built/prusa-slicer_2.3.0-alpha3-20201116a-1_amd64.deb
+# && ASAN_OPTIONS=verify_asan_link_order=0 checkinstall -D --install=yes --fstrans=no --pkgname=prusa-slicer --provides=prusa-slicer --pkgversion=2.3.0a3-20201116a --nodoc -y \
+# && cp /build/PrusaSlicer/build/prusa-slicer_2.3.0a3-20201116a-1_amd64.deb /built/prusa-slicer_2.3.0a3-20201116a-1_amd64.deb
+ && ASAN_OPTIONS=verify_asan_link_order=0 checkinstall -D --install=yes --fstrans=no --pkgname=prusa-slicer --provides=prusa-slicer --pkgversion=2.4.2-20220528a --nodoc -y \
+ && cp /build/PrusaSlicer/build/prusa-slicer_2.4.2-20220528a-1_amd64.deb /built/prusa-slicer_2.4.2-20220528a-1_amd64.deb
 # required if we want to actually run prusa-slicer in the docker container
 RUN DEBIAN_FRONTEND=noninteractive apt update -y \
  && DEBIAN_FRONTEND=noninteractive apt --no-install-recommends -y full-upgrade \
@@ -123,13 +126,16 @@ RUN cd /build \
  && git clone https://github.com/46cv8/GPX.git \
  && cd /build/GPX \
  && git remote add upstream https://github.com/markwal/GPX.git \
- && git checkout variable_fan_speed_and_fast_alt_serial \
+# && git checkout variable_fan_speed_and_fast_alt_serial_2_5_2 \
+ && git checkout variable_fan_speed_and_fast_alt_serial_2_6_8 \
  && mkdir build \
  && cd /build/GPX/build \
  && ../configure \
  && make \
- && checkinstall -D --install=yes --fstrans=no --pkgname=gpx --provides=gpx --pkgversion=2.5.2-20201116a --nodoc -y \
- && cp /build/GPX/build/gpx_2.5.2-20201116a-1_amd64.deb /built/gpx_2.5.2-20201116a-1_amd64.deb
+# && checkinstall -D --install=yes --fstrans=no --pkgname=gpx --provides=gpx --pkgversion=2.5.2-20201116a --nodoc -y \
+# && cp /build/GPX/build/gpx_2.5.2-20201116a-1_amd64.deb /built/gpx_2.5.2-20201116a-1_amd64.deb
+ && checkinstall -D --install=yes --fstrans=no --pkgname=gpx --provides=gpx --pkgversion=2.6.8-20220528a --nodoc -y \
+ && cp /build/GPX/build/gpx_2.6.8-20220528a-1_amd64.deb /built/gpx_2.6.8-20220528a-1_amd64.deb
 
 FROM build_gpx as build_gpx_ui
 RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y \
@@ -139,15 +145,19 @@ RUN DEBIAN_FRONTEND=noninteractive apt install --no-install-recommends -y \
  && git clone https://github.com/46cv8/GpxUi \
  && cd /build/GpxUi \
  && git remote add upstream https://github.com/markwal/GpxUi.git \
- && git checkout variable_fan_speed_and_fast_alt_serial \
+# && git checkout variable_fan_speed_and_fast_alt_serial_2_5_2 \
+ && git checkout variable_fan_speed_and_fast_alt_serial_2_6_8 \
  && git submodule update --init --recursive \
  && cd /build/GpxUi/GPX \
- && git checkout variable_fan_speed_and_fast_alt_serial \
+# && git checkout variable_fan_speed_and_fast_alt_serial_2_5_2 \
+ && git checkout variable_fan_speed_and_fast_alt_serial_2_6_8 \
  && cd /build/GpxUi \
  && make release \
 # checkinstall can't build qmake modules to debian so I can't make a package and just do make install (see: https://askubuntu.com/questions/1014619/a-working-version-of-checkinstall)
 # && checkinstall -D --install=yes --fstrans=no --pkgname=gpx-ui --provides=gpx-ui --pkgversion=2.5.2-20201116a --nodoc -y \
 # && cp /build/GpxUi/gpx-ui_2.5.2-20201116a-1_amd64.deb /built/gpx-ui_2.5.2-20201116a-1_amd64.deb
+# && checkinstall -D --install=yes --fstrans=no --pkgname=gpx-ui --provides=gpx-ui --pkgversion=2.6.8-20220528a --nodoc -y \
+# && cp /build/GpxUi/gpx-ui_2.6.8-20220528a-1_amd64.deb /built/gpx-ui_2.6.8-20220528a-1_amd64.deb
  && make install
 
 FROM build_gpx_ui as install_replicatorg
@@ -157,3 +167,4 @@ RUN cd /opt \
  && chmod 777 /opt/replicatorg-0040
 
 # sudo docker build -t yourusername/docker-ffcp:20.04-2.3.0a3-20201116a .
+# sudo docker build -t yourusername/docker-ffcp:20.04-2.4.2-20220528a .
